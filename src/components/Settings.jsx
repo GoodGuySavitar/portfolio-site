@@ -58,7 +58,7 @@ const Settings = ({onClose, setWallpaper, currentWallpaper}) => {
             <div ref={nodeRef} 
             className='w-1/2 h-4/5 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white
             flex items-start justify-between select-none pointer-events-auto'>
-                <div className='w-1/3 h-full bg-gray-700/50 backdrop-blur-lg rounded-2xl border border-gray-300/80 shadow-lg pl-2 pt-2 pr-2 pb-2'>
+                <div className='w-1/3 h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg pl-2 pt-2 pr-2 pb-2'>
                     <SettingsOptions 
                         onClose={onClose}
                         onProfileClick={handleProfileClick}
@@ -118,12 +118,6 @@ const SettingsOptions = ({onClose, onProfileClick, onWallpapersClick, onCreditsC
             >
                 Asmit Chauhan
             </div>
-            {/* <div
-                className={`mb-4 p-2 rounded-md text-lg cursor-pointer  ${activeSection === 'tech stacks' ? 'bg-blue-500 text-white' : ''}`}
-                onClick={onTechClick}
-            >
-                Tech Stacks
-            </div> */}
             <div className="w-full border-b border-gray-400 my-4" />
             <div
                 className={`mb-2 p-2 rounded-md text-lg cursor-pointer ${activeSection === 'wallpapers' ? 'bg-blue-500 text-white' : ''}`}
@@ -169,14 +163,6 @@ const SettingsProfile = () => {
     )
 }
 
-const TechStacks = () => {
-    return (
-        <div className='w-full p-2 flex flex-col items-center'>
-            
-        </div>
-    )
-}
-
 const Wallpapers = ({setWallpaper, currentWallpaper}) => {
     const wallpapers = [
         wallpaper1, wallpaper2, wallpaper3, wallpaper4, wallpaper5, wallpaper6, wallpaper7, wallpaper8, wallpaper9
@@ -210,13 +196,13 @@ const Credits = () => {
         <div className='w-full flex flex-col items-start p-12 '>
             <div className='text-lg mb-4 font-semibold tracking-wide'>Credits</div>
             <div className='text-md mb-2 tracking-wide'>
-                Icons: <a href='https://macosicons.com/#/' target='_blank' className="text-blue-500 hover:underline">macOSicons by Elias</a>
+                Icons: <a href='https://macosicons.com/#/' target='_blank' className="text-blue-500 hover:underline" draggable="false" >macOSicons by Elias</a>
             </div>
             <div className='text-md mb-2 tracking-wide'>
-                Backgrounds: <a href='https://wallpapercave.com/' target='_blank' className="text-blue-500 hover:underline">Wallpaper Cave</a>
+                Backgrounds: <a href='https://wallpapercave.com/' target='_blank' className="text-blue-500 hover:underline" draggable="false">Wallpaper Cave</a>
             </div>
             <div className='text-md mb-2 tracking-wide'>
-                Font: <a href='https://developer.apple.com/fonts/' target='_blank' className="text-blue-500 hover:underline">Apple</a>
+                Font: <a href='https://developer.apple.com/fonts/' target='_blank' className="text-blue-500 hover:underline"draggable="false">Apple</a>
             </div>
         </div>
     )   

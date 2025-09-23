@@ -18,22 +18,27 @@ import winLogo from '../assets/Win95.png'
 import cursor from '../assets/cursor.png'
 import { useMotionValue, motion, useTransform, useSpring, useAnimation } from 'framer-motion'
 import Settings from './Settings'
-import Resume from './Resume'
+import Contact from './Contact'
+import Projects from './Projects'
 
 const Home = () => {
   
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [resumeOpen, setResumeOpen] = useState(false);
+  const [contactsOpen, setContactsOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
   const [wallpaper, setWallpaper] = useState(wallpaper1);
 
   const openProjects = () => {
-    console.log("Projects clicked clicked");
+    if (!projectsOpen) {
+      setProjectsOpen(true);
+      console.log("Projects opened");
+    }
   }
   
   const openGithub = () => {
     window.open("https://github.com/GoodGuySavitar", "_blank");
   }
-  
+
   const openSettings = () => {
     if (!settingsOpen) {
       setSettingsOpen(true);
@@ -41,17 +46,21 @@ const Home = () => {
     }
   }
 
-  const openResume = () => {
-    if (!settingsOpen) {
-      setResumeOpen(true);
-      console.log("Resume opened");
+  const openContacts = () => {
+    if (!contactsOpen) {
+      setContactsOpen(true);
+      console.log("Contacts opened");
     }
+  }
+
+  const openResume = () => {
+    window.open("https://drive.google.com/file/d/1PcDz_86G-9tp9M--V9YyjMsRU9Ck6lNL/view?usp=sharing", "_blank");
   }
   const icons = [
       { src: folder, label: 'Projects', func: openProjects },
       { src: githubLogo, label: 'GitHub', func: openGithub },
       { src: notesLogo, label: 'Resume', func: openResume},
-      { src: contactLogo, label: 'Contacts'},
+      { src: contactLogo, label: 'Contacts', func: openContacts},
       { src: settingsIcon, label: 'Settings', func: openSettings },
       { src: winLogo, label: 'Windows95' }
   ]
@@ -82,12 +91,13 @@ const Home = () => {
                 />
               }
 
-              {
-                <Resume
-                onClose={() => setResumeOpen(false)}
-                />
+              { contactsOpen &&
+                <Contact onClose={() => setContactsOpen(false)}/>
               }
 
+              { projectsOpen && 
+                <Projects onClose={() => setProjectsOpen(false)}/>
+              }
           </div>
 
           {/* DOCK */}
