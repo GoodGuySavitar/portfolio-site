@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import Draggable from 'react-draggable'
-import profilePic from '../assets/profilePic.jpeg'
+import profilePic from '../assets/ProfilePic.jpeg'
 import linkedinLogo from '../assets/Linkedin.png'
 import mailLogo from '../assets/mail.png'
 import githubLogo from '../assets/githubLogo.png'

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import profilePic from '../assets/profilePic.jpeg'
+import profilePic from '../assets/ProfilePic.jpeg'
 import Draggable from 'react-draggable'
 import wallpaper1 from '../assets/wallpaper.jpg'
 import wallpaper2 from '../assets/wallpaper2.jpg'

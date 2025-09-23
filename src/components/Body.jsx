@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./Home"
-import Projects from "./Projects"
 
 const Body = () => {
 
@@ -8,10 +7,6 @@ const Body = () => {
         {
             path: "/",
             element: <Home/>
-        },
-        {   
-            path: "/Projects",
-            element: <Projects/>
         },
     ])
     
