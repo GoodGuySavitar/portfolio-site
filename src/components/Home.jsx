@@ -80,6 +80,7 @@ const Home = () => {
   const {level, charging} = useBattery()
   const date = new Date();
   const showTime = date.getHours() + ":" + date.getMinutes() 
+  console.log(date.getHours())
 
   //MAIN HOME SCREEN, CONTAINS DOCK AND ICONS. ICONS ARE BEING FILTERED SO THAT WINDOWS95 ICON DOES NOT APPEAR ON THE SCREEN AND IN THE DOCK THE FOLDER DOESNT APPEAR 
 
@@ -95,7 +96,7 @@ const Home = () => {
           </div>
           <img src={battery} alt="battery logo" className='mx-1'/>
           {charging && <img src={chargingLogo} alt="charging logo" className='h-4'/>}
-          <div className='mx-4 text-sm'>{showTime} {(date.getHours > 12)? "AM" : "PM" } </div>
+          <div className='mx-4 text-sm'>{showTime} {(date.getHours() > 12)? "PM" : "AM" } </div>
         </div>
       </div>
 

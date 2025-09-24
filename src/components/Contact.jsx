@@ -40,7 +40,7 @@ const Contact = ({onClose}) => {
                       className="w-12 h-12 rounded-full overflow-hidden" 
                       draggable="false" 
                       onClick={() => {
-                        window.open("https://github.com/GoodGuySavitar", "_blank");
+                        window.open("https://www.linkedin.com/in/asmit-chauhan/", "_blank");
                       }} />
                     <p className='font-normal' >LinkedIn</p>
                   </div>
