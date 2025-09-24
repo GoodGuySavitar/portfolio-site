@@ -150,12 +150,12 @@ const SettingsProfile = () => {
             </div>
             <div className='mt-4 w-full h-full p-2 flex flex-col text-md tracking-wide'>
                 <h1 className='mb-3 text-lg'>About Me</h1>
-                <p className='mb-2 '>Hello, I'm Asmit</p>
-                <p className='mb-2'>
+                <p className='my-2 '>Hello, I'm Asmit</p>
+                <p className='my-2'>
                     I'm a final year Computer Science student.
                 </p>
                 <p>
-                    I love building web applications that bring ideas to life. Along with web dev, I have explored in game development in Unity through internships at Electrum Interactive, Smollan and Constituents AI. These experiences have strengthened my problem-solving skills, taught me to adapt to fast-paced environments, and helped me grow both professionally and personally. 
+                    I love building web applications that bring ideas to life. Along with web dev, I have explored game development in Unity through internships at Electrum Interactive, Smollan and Constituents AI. These experiences have strengthened my problem-solving skills, taught me to adapt to fast-paced environments, and helped me grow both professionally and personally. 
                 </p>
                 <p></p>
             </div>
@@ -195,17 +195,20 @@ const Credits = () => {
     return (
         <div className='w-full flex flex-col items-start p-12 '>
             <div className='text-lg mb-4 font-semibold tracking-wide'>Credits</div>
-            <div className='text-md mb-2 tracking-wide'>
-                Icons: <a href='https://macosicons.com/#/' target='_blank' className="text-blue-500 hover:underline" draggable="false" >macOSicons by Elias</a>
-            </div>
-            <div className='text-md mb-2 tracking-wide'>
-                Backgrounds: <a href='https://wallpapercave.com/' target='_blank' className="text-blue-500 hover:underline" draggable="false">Wallpaper Cave</a>
-            </div>
-            <div className='text-md mb-2 tracking-wide'>
-                Font: <a href='https://developer.apple.com/fonts/' target='_blank' className="text-blue-500 hover:underline"draggable="false">Apple</a>
-            </div>
+            <CreditsComponent component={"Icons"} siteLink={'https://macosicons.com/#/'} siteName={'macOSicons by Elias'}/>
+            <CreditsComponent component={"Backgrounds"} siteLink={'https://wallpapercave.com/'} siteName={'Wallpaper Cave'}/>
+            <CreditsComponent component={"Font"} siteLink={'https://developer.apple.com/fonts/'} siteName={'Apple'}/>
+            <CreditsComponent component={"Cat Gif"} siteLink={'https://giphy.com/'} siteName={'Giphy'}/>
         </div>
     )   
 }
 
+const CreditsComponent = ({component , siteLink, siteName}) => {
+    return (
+        <div className='text-md mb-2 tracking-wide'>
+            {component}: <a href={siteLink} target='_blank' className="text-blue-500 hover:underline" draggable="false" >
+            {siteName}</a>
+        </div>
+    )
+}
 export default Settings

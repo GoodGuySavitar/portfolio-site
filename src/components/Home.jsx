@@ -20,6 +20,11 @@ import { useMotionValue, motion, useTransform, useSpring, useAnimation } from 'f
 import Settings from './Settings'
 import Contact from './Contact'
 import Projects from './Projects'
+import { useBattery } from 'react-use'
+import battery from '../assets/battery.jpg'
+import chargingLogo from '../assets/chargingLogo.jpg'
+import { useNavigate } from 'react-router-dom'
+
 
 const Home = () => {
   
@@ -27,6 +32,7 @@ const Home = () => {
   const [contactsOpen, setContactsOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [wallpaper, setWallpaper] = useState(wallpaper1);
+  const navigate = useNavigate();
 
   const openProjects = () => {
     if (!projectsOpen) {
@@ -56,22 +62,42 @@ const Home = () => {
   const openResume = () => {
     window.open("https://drive.google.com/file/d/1PcDz_86G-9tp9M--V9YyjMsRU9Ck6lNL/view?usp=sharing", "_blank");
   }
+
+  const openWindows = () => {
+    console.log("Navigating to Windows95...");
+    navigate("/win")
+  }
   const icons = [
       { src: folder, label: 'Projects', func: openProjects },
       { src: githubLogo, label: 'GitHub', func: openGithub },
       { src: notesLogo, label: 'Resume', func: openResume},
       { src: contactLogo, label: 'Contacts', func: openContacts},
       { src: settingsIcon, label: 'Settings', func: openSettings },
-      { src: winLogo, label: 'Windows95' }
+      { src: winLogo, label: 'Windows95', func: openWindows}  
   ]
+
+
+  const {level, charging} = useBattery()
+  const date = new Date();
+  const showTime = date.getHours() + ":" + date.getMinutes() 
 
   //MAIN HOME SCREEN, CONTAINS DOCK AND ICONS. ICONS ARE BEING FILTERED SO THAT WINDOWS95 ICON DOES NOT APPEAR ON THE SCREEN AND IN THE DOCK THE FOLDER DOESNT APPEAR 
 
   return (
-    <div className="h-screen w-screen  flex flex-col absolute">
-      {/* <div className="h-5 w-full bg-black flex items-center justify-center absolute">
-        <div className="w-1/10 h-8 bg-black mt-6 rounded-[6px] z-10"></div>
+    <div className="h-screen w-screen flex flex-col absolute items-center">
+      {/* <div className='w-full bg-black '>
       </div> */}
+      <div className="h-6 w-full bg-black text-white absolute select-none flex justify-between" style={{cursor: `url(${cursor}), auto`}}>
+        <div className='ml-1 text-lg'>  </div>
+        <div className='flex items-center'>
+          <div className='text-sm'>
+            {level * 100}% 
+          </div>
+          <img src={battery} alt="battery logo" className='mx-1'/>
+          {charging && <img src={chargingLogo} alt="charging logo" className='h-4'/>}
+          <div className='mx-4 text-sm'>{showTime} {(date.getHours > 12)? "AM" : "PM" } </div>
+        </div>
+      </div>
 
       <div className="flex-1 w-full bg-cover bg-center" 
       style={{ backgroundImage: `url(${wallpaper})`, cursor: `url(${cursor}), auto` }}>
