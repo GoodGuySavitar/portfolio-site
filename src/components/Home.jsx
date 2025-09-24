@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import wallpaper1 from '../assets/wallpaper.jpg'
 import wallpaper2 from '../assets/wallpaper2.jpg'
 import wallpaper3 from '../assets/wallpaper3.jpg'
@@ -33,7 +33,25 @@ const Home = () => {
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [wallpaper, setWallpaper] = useState(wallpaper1);
   const navigate = useNavigate();
+  
+  const {level, charging} = useBattery()
+  const date = new Date();
 
+  const [time, setTime] = useState(new Date())
+
+  useEffect(() => {
+    const update = () => setTime(new Date())
+
+    update();
+
+    const timer = setInterval(update, 60000)
+
+    return () => clearInterval(timer)
+  }, []);
+
+  const hours = String(time.getHours()).padStart(2, "0");
+  const minutes = String(time.getMinutes()).padStart(2, "0");
+  
   const openProjects = () => {
     if (!projectsOpen) {
       setProjectsOpen(true);
@@ -77,10 +95,6 @@ const Home = () => {
   ]
 
 
-  const {level, charging} = useBattery()
-  const date = new Date();
-  const showTime = date.getHours() + ":" + date.getMinutes() 
-  console.log(date.getHours())
 
   //MAIN HOME SCREEN, CONTAINS DOCK AND ICONS. ICONS ARE BEING FILTERED SO THAT WINDOWS95 ICON DOES NOT APPEAR ON THE SCREEN AND IN THE DOCK THE FOLDER DOESNT APPEAR 
 
@@ -88,15 +102,16 @@ const Home = () => {
     <div className="h-screen w-screen flex flex-col absolute items-center">
       {/* <div className='w-full bg-black '>
       </div> */}
-      <div className="h-6 w-full bg-black text-white absolute select-none flex justify-between" style={{cursor: `url(${cursor}), auto`}}>
+      <div className="h-6 w-full fixed top-0 flex justify-between 
+      bg-black text-white select-none" style={{cursor: `url(${cursor}), auto`}}>
         <div className='ml-1 text-lg'>  </div>
         <div className='flex items-center'>
           <div className='text-sm'>
-            {level * 100}% 
+            {Math.round(level * 100)}%
           </div>
           <img src={battery} alt="battery logo" className='mx-1'/>
           {charging && <img src={chargingLogo} alt="charging logo" className='h-4'/>}
-          <div className='mx-4 text-sm'>{showTime} {(date.getHours() > 12)? "PM" : "AM" } </div>
+          <div className='mx-4 text-sm'>{hours}:{minutes} {(date.getHours() >= 12)? "PM" : "AM" } </div>
         </div>
       </div>
 
@@ -129,7 +144,7 @@ const Home = () => {
 
           {/* DOCK */}
 
-          <div>
+          <div className="absolute bottom-8 w-full flex justify-center">
             <Dock icons={icons}/>
           </div>
           
