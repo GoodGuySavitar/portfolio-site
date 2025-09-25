@@ -1,13 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import wallpaper1 from '../assets/wallpaper.jpg'
-import wallpaper2 from '../assets/wallpaper2.jpg'
-import wallpaper3 from '../assets/wallpaper3.jpg'
-import wallpaper4 from '../assets/wallpaper4.jpg'
-import wallpaper5 from '../assets/wallpaper5.jpg'
-import wallpaper6 from '../assets/wallpaper6.jpg'
-import wallpaper7 from '../assets/wallpaper7.jpg'
-import wallpaper8 from '../assets/wallpaper8.jpg'
-import wallpaper9 from '../assets/wallpaper9.jpg'
 import folder from '../assets/folder.png'
 import githubLogo from '../assets/githubLogo.png'
 import notesLogo from '../assets/notes.png'
@@ -179,14 +171,15 @@ const Dock = ({icons}) => {
 const DockIcons = ({mouseX, src, alt, onClick}) => {
     let ref = useRef(null)
     const controls = useAnimation();
+    const [hovered, setHovered] = useState(false)
 
     let distance = useTransform(mouseX, (value) => {
     if (value == null) return 9999
     let bounds = ref.current?.getBoundingClientRect()
     if (!bounds) return 0;
-    
-      const d = value - (bounds.x + bounds.width / 2)
-      return d
+  
+    const d = value - (bounds.x + bounds.width / 2)
+    return d
   })
 
   let widthSync = useTransform(distance, [-125, 0, 125], [60, 120, 60])
@@ -205,7 +198,11 @@ const DockIcons = ({mouseX, src, alt, onClick}) => {
 
   //THIS IS THE ACTUAL ICON ELEMENT. ONCLICK FUNCTIONALITY CAN BE ADDED TO THESE
   return (
-    <motion.div style={{ width: width, height: width }} className="flex items-center justify-center" onClick={handleClick}>
+    <motion.div style={{ width: width, height: width }} className="flex items-center justify-center" onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      {
+        hovered && 
+        <div className="absolute -top-18 px-2 py-1 bg-gray-700/70 backdrop-blur-lg rounded-sm border border-gray-300/80 shadow-lg text-white text-xs whitespace-nowrap">{alt}</div>
+      }
       <motion.img animate={controls} initial={{ y: 0 }} ref={ref} src={src} alt={alt} className='object-contain w-full h-full m-2 select-none'/>
     </motion.div>
   )
