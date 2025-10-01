@@ -149,7 +149,8 @@ const SettingsOptions = ({onClose, onProfileClick, onWallpapersClick, onCreditsC
         <div className='flex flex-col'>
             <div className='flex '>
                 <div className="relative group w-3 h-3 bg-red-500 rounded-full  mr-2 mb-6 flex items-center justify-center transform transition-transform ease-in-out hover:scale-125"
-                onClick={onClose}>
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }}>
                 {/* X appears only on hover */}
                 <span className="text-[8px] text-red-800 font-extrabold opacity-0 group-hover:opacity-100">
                         ✕

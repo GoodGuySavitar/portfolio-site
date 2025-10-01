@@ -22,7 +22,8 @@ const Contact = ({onClose}) => {
         className="w-1/3 h-1/2 mt-4 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white flex items-start justify-between select-none pointer-events-auto">
           <div className='w-full h-full flex flex-col'>
             <div className="relative group w-3 h-3 bg-red-500 rounded-full  mr-2 mb-6 flex items-center justify-center transform transition-transform ease-in-out hover:scale-125"
-            onClick={onClose}>
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
+            onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }}>
               {/* X appears only on hover */}
               <span className="text-[8px] text-red-800 font-extrabold opacity-0 group-hover:opacity-100">
                       ✕

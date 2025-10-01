@@ -22,7 +22,8 @@ const Projects = ({onClose}) => {
         <div className='w-full h-full'>
             <div className='w-full h-full flex flex-col'>
               <div className="absolute group w-3 h-3 bg-red-500 rounded-full mr-2 mb-6 flex items-center justify-center transform transition-transform ease-in-out hover:scale-125"
-              onClick={onClose}>
+              onClick={(e) => { e.stopPropagation(); onClose(); }}
+              onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }}>
                 <span className="text-[8px] text-red-800 font-extrabold opacity-0 group-hover:opacity-100">
                   ✕
                 </span>
