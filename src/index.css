@@ -34,6 +34,12 @@ html, body, #root {
 }
 
 /* Custom scrollbar for the projects container */
+.scrollbar-custom {
+  /* Enable touch scrolling */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
 .scrollbar-custom::-webkit-scrollbar {
   width: 8px;               /* scrollbar width */
 }
@@ -64,6 +70,9 @@ html, body, #root {
   /* Firefox */
   scrollbar-width: auto;
   scrollbar-color: #9c9c9c #c3c3c3; /* thumb track */
+  /* Enable touch scrolling */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 .scrollbar-win95::-webkit-scrollbar {
