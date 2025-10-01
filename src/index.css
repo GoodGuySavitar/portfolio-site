@@ -6,11 +6,31 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'W 95 FA';
+    src: url('./assets/fonts/W95FA.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-sfpro{
+  font-family:'SF PRO DISPLAY', sans-serif;
+}
+
+.font-w95fa{
+  font-family:'W 95 FA', sans-serif;
+}
+
 
 @import "tailwindcss";
 
 body {
     font-family: 'SF Pro Display', sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden; /* prevent page scroll; let internal panes manage overflow */
 }
 
 /* Custom scrollbar for the projects container */
@@ -37,4 +57,102 @@ body {
 .scrollbar-custom {
   scrollbar-width: thin;
   scrollbar-color: rgba(156, 163, 175, 0.8) rgba(55, 65, 81, 0.3);
+}
+
+/* Windows 95-esque scrollbar */
+.scrollbar-win95 {
+  /* Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #9c9c9c #c3c3c3; /* thumb track */
+}
+
+.scrollbar-win95::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+  background: #c3c3c3;
+}
+
+.scrollbar-win95::-webkit-scrollbar-track {
+  background: #c3c3c3;
+  /* Beveled track */
+  box-shadow:
+    inset 1px 1px 0 0 #ffffff,
+    inset -1px -1px 0 0 #828282;
+}
+
+.scrollbar-win95::-webkit-scrollbar-thumb {
+  background: #9c9c9c;
+  /* Boxy bevel */
+  box-shadow:
+    inset 1px 1px 0 0 #828282,
+    inset -1px -1px 0 0 #ffffff;
+  border: 2px solid #c3c3c3; /* creates the gutter gap */
+}
+
+.scrollbar-win95::-webkit-scrollbar-thumb:hover {
+  background: #8a8a8a;
+}
+
+.scrollbar-win95::-webkit-scrollbar-thumb:active {
+  /* invert bevel to look pressed */
+  box-shadow:
+    inset 1px 1px 0 0 #ffffff,
+    inset -1px -1px 0 0 #828282;
+}
+
+.scrollbar-win95::-webkit-scrollbar-corner {
+  background: #c3c3c3;
+}
+
+/* Arrow buttons */
+.scrollbar-win95::-webkit-scrollbar-button {
+  width: 16px;
+  height: 16px;
+  background: #c3c3c3;
+  box-shadow:
+    inset 1px 1px 0 0 #ffffff,
+    inset -1px -1px 0 0 #828282;
+}
+
+.scrollbar-win95::-webkit-scrollbar-button:active {
+  box-shadow:
+    inset 1px 1px 0 0 #828282,
+    inset -1px -1px 0 0 #ffffff;
+}
+
+/* Draw triangle arrows using gradients */
+.scrollbar-win95::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image:
+    linear-gradient(45deg, transparent 46%, #000 46%),
+    linear-gradient(315deg, transparent 46%, #000 46%);
+  background-position: 6px 8px, 9px 8px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.scrollbar-win95::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image:
+    linear-gradient(225deg, transparent 46%, #000 46%),
+    linear-gradient(135deg, transparent 46%, #000 46%);
+  background-position: 6px 6px, 9px 6px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.scrollbar-win95::-webkit-scrollbar-button:single-button:horizontal:decrement {
+  background-image:
+    linear-gradient(135deg, transparent 46%, #000 46%),
+    linear-gradient(225deg, transparent 46%, #000 46%);
+  background-position: 8px 6px, 8px 9px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.scrollbar-win95::-webkit-scrollbar-button:single-button:horizontal:increment {
+  background-image:
+    linear-gradient(315deg, transparent 46%, #000 46%),
+    linear-gradient(45deg, transparent 46%, #000 46%);
+  background-position: 6px 6px, 6px 9px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
 }

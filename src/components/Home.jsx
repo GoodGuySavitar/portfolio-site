@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import wallpaper1 from '../assets/wallpaper.jpg'
 import folder from '../assets/folder.png'
 import githubLogo from '../assets/githubLogo.png'
@@ -16,14 +16,16 @@ import { useBattery } from 'react-use'
 import battery from '../assets/battery.jpg'
 import chargingLogo from '../assets/chargingLogo.jpg'
 import { useNavigate } from 'react-router-dom'
+import { UiContext } from './Body'
 
 
 const Home = () => {
   
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [contactsOpen, setContactsOpen] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
-  const [wallpaper, setWallpaper] = useState(wallpaper1);
+  const ui = useContext(UiContext)
+  const [wallpaper, setWallpaper] = useState(() => {
+    const saved = localStorage.getItem('macWallpaper')
+    return saved || wallpaper1
+  });
   const navigate = useNavigate();
   
   const {level, charging} = useBattery()
@@ -45,8 +47,8 @@ const Home = () => {
   const minutes = String(time.getMinutes()).padStart(2, "0");
   
   const openProjects = () => {
-    if (!projectsOpen) {
-      setProjectsOpen(true);
+    if (!ui.projectsOpen) {
+      ui.openProjects();
       console.log("Projects opened");
     }
   }
@@ -56,15 +58,21 @@ const Home = () => {
   }
 
   const openSettings = () => {
-    if (!settingsOpen) {
-      setSettingsOpen(true);
+    if (!ui.settingsOpen) {
+      ui.openSettings();
       console.log("Settings opened");
     }
   }
 
+  useEffect(() => {
+    if (wallpaper) {
+      localStorage.setItem('macWallpaper', wallpaper)
+    }
+  }, [wallpaper])
+
   const openContacts = () => {
-    if (!contactsOpen) {
-      setContactsOpen(true);
+    if (!ui.contactsOpen) {
+      ui.openContacts();
       console.log("Contacts opened");
     }
   }
@@ -74,9 +82,16 @@ const Home = () => {
   }
 
   const openWindows = () => {
-    console.log("Navigating to Windows95...");
+    ui.setWindows()
     navigate("/win")
   }
+
+  // Ensure OS context is set to Mac when on Home
+  useEffect(() => {
+    if (!ui.isMac) {
+      ui.setMac()
+    }
+  }, [])
   const icons = [
       { src: folder, label: 'Projects', func: openProjects },
       { src: githubLogo, label: 'GitHub', func: openGithub },
@@ -112,25 +127,23 @@ const Home = () => {
         <div>
           <div className="h-170 w-full p-10 flex flex-col items-end justify-start">            
               {icons.filter((icons) => icons.src !== winLogo).map((icons, i) => {
-                return <DraggableIcon key={i} src={icons.src} label={icons.label} func={icons.func}/>
+                return <DraggableIcon key={i} src={icons.src} label={icons.label} func={icons.func} />
               })}
 
-              {/* Settings Modal */}
-
-              {settingsOpen &&
+              {ui.settingsOpen &&
                 <Settings 
-                  onClose={() => setSettingsOpen(false)}
+                  onClose={ui.closeSettings}
                   currentWallpaper={wallpaper}
                   setWallpaper={setWallpaper}
                 />
               }
 
-              { contactsOpen &&
-                <Contact onClose={() => setContactsOpen(false)}/>
+              { ui.contactsOpen &&
+                <Contact onClose={ui.closeContacts}/>
               }
 
-              { projectsOpen && 
-                <Projects onClose={() => setProjectsOpen(false)}/>
+              { ui.projectsOpen && 
+                <Projects onClose={ui.closeProjects}/>
               }
           </div>
 

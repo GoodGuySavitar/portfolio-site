@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,  useContext } from 'react'
 import profilePic from '../assets/ProfilePic.jpeg'
 import Draggable from 'react-draggable'
 import wallpaper1 from '../assets/wallpaper.jpg'
@@ -10,9 +10,12 @@ import wallpaper6 from '../assets/wallpaper6.jpg'
 import wallpaper7 from '../assets/wallpaper7.jpg'
 import wallpaper8 from '../assets/wallpaper8.jpg'
 import wallpaper9 from '../assets/wallpaper9.jpg'
+import { UiContext } from './Body'
+import close from '../assets/close.png'
 
 const Settings = ({onClose, setWallpaper, currentWallpaper}) => {
     const nodeRef = useRef(null)
+    const ui = useContext(UiContext)
 
     const [settingsActive, setSettingsActive] = useState(true);
     const [wallpapersActive, setWallpapersActive] = useState(false);
@@ -55,45 +58,85 @@ const Settings = ({onClose, setWallpaper, currentWallpaper}) => {
         <div className="fixed inset-0 pointer-events-none flex items-start justify-center">
         <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center">
         <Draggable nodeRef={nodeRef} bounds="parent">
-            <div ref={nodeRef} 
-            className='w-1/2 h-4/5 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white
-            flex items-start justify-between select-none pointer-events-auto'>
-                <div className='w-1/3 h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg pl-2 pt-2 pr-2 pb-2'>
-                    <SettingsOptions 
-                        onClose={onClose}
-                        onProfileClick={handleProfileClick}
-                        onWallpapersClick={handleWallpapersClick}
-                        onCreditsClick={handleCreditsClick}
-                        onTechClick={handleTechClick}
-                        activeSection={
-                            settingsActive ? 'profile' :
-                            wallpapersActive ? 'wallpapers' :
-                            creditsActive ? 'credits' : 
-                            techActive ? 'tech stacks' : ''
+            { ui.isMac ? (
+                <div ref={nodeRef} className='w-[90vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[70vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh] bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white
+                flex items-start justify-between select-none pointer-events-auto overflow-hidden scrollbar-custom'>
+                    <div className='w-1/3 h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg pl-2 pt-2 pr-2 pb-2'>
+                        <SettingsOptions 
+                            onClose={onClose}
+                            onProfileClick={handleProfileClick}
+                            onWallpapersClick={handleWallpapersClick}
+                            onCreditsClick={handleCreditsClick}
+                            onTechClick={handleTechClick}
+                            activeSection={
+                                settingsActive ? 'profile' :
+                                wallpapersActive ? 'wallpapers' :
+                                creditsActive ? 'credits' : ''
+                            }
+                        />
+                    </div>
+                    <div className='pr-4 w-2/3 h-full overflow-auto break-words'>
+                        {settingsActive &&
+                            <SettingsProfile/>
                         }
-                    />
+                        {wallpapersActive &&
+                            <div>
+                                <Wallpapers setWallpaper={setWallpaper} currentWallpaper={currentWallpaper}/>
+                            </div>
+                        }
+                        {creditsActive &&   
+                            <div>
+                                <Credits/>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div className='pr-4 w-2/3 h-full'>
-                    {settingsActive &&
-                        <SettingsProfile/>
-                    }
-                    {techActive &&
-                        <div>
-                            <TechStacks/>
+            ) : (
+                <div ref={nodeRef} className='w-[92vw] sm:w-4/5 md:w-2/3 lg:w-1/2 h-[50vh] sm:h-[50vh] md:h-[50vh] lg:h-[50vh] max-h-[50vh] bg-[#c3c3c3] text-black border-3
+                 border-l-white border-t-white shadow pointer-events-auto select-none flex flex-col overflow-hidden'>
+                    <div className='w-full h-8 flex justify-between items-center bg-[#000082] shrink-0'>
+                        <div className='text-lg text-white flex items-center ml-1'>
+                            About Me
                         </div>
-                    }
-                    {wallpapersActive &&
-                        <div>
-                            <Wallpapers setWallpaper={setWallpaper} currentWallpaper={currentWallpaper}/>
+                        <div className='text-lg text-white flex items-center mr-1 '>
+                            <div
+                                className="w-7 h-7 mr-0.5 bg-[#c3c3c3] flex items-center justify-center cursor-pointer select-none
+                                border-3 border-t-white border-l-white border-b-[#828282] border-r-[#828282]
+                                active:border-t-[#828282] active:border-l-[#828282] active:border-b-white active:border-r-white active:translate-y-[1px]"
+                                onClick={onClose}
+                            >
+                                <img src={close} alt="close" className='w-4 select-none' draggable={false}/>
+                            </div>
                         </div>
-                    }
-                    {creditsActive &&   
-                        <div>
-                            <Credits/>
+                    </div>
+                    <div className='w-full flex-1 min-h-0 flex justify-between overflow-hidden'>
+                        <div className='w-2/5 sm:w-1/3 h-full min-h-0 flex flex-col items-center overflow-auto scrollbar-win95 pt-4 sm:pt-6 pb-2'>
+                            <div className='w-32 h-32 sm:w-40 sm:h-40 flex justify-center items-center 
+                            border-2 border-t-white border-l-white border-b-[#828282] border-r-[#828282]'>
+                                <div className='w-28 h-28 sm:w-36 sm:h-36'>
+                                    <img src={profilePic} alt="Profile Picture" draggable="false" className="select-none pointer-events-none"/>
+                                </div>
+                            </div>
+                            <div className='text-lg sm:text-xl mt-4'>
+                                Asmit Singh Chauhan
+                            </div>
+                            <div className='text-base sm:text-lg mt-1'>
+                                +91 8867096611
+                            </div>
                         </div>
-                    }
+                        <div className='w-3/5 sm:w-2/3 h-full min-h-0 text-base sm:text-lg pr-2 mr-2 sm:mr-4 overflow-auto break-words scrollbar-win95 pt-4 sm:pt-6 pb-2'>
+                            <p>Hello, I'm Asmit</p>
+                            <p className='my-2'>
+                                I'm a final year Computer Science student.
+                            </p>
+                            <p>
+                                I love building web applications that bring ideas to life. Along with web dev, I have explored game development in Unity through internships at Electrum Interactive, Smollan and Constituents AI. These experiences have strengthened my problem-solving skills, taught me to adapt to fast-paced environments, and helped me grow both professionally and personally. 
+                            </p>
+                            <p className='my-2'>This website was made by me from scratch!</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
         </Draggable>    
         </div>
         </div>
@@ -157,7 +200,7 @@ const SettingsProfile = () => {
                 <p>
                     I love building web applications that bring ideas to life. Along with web dev, I have explored game development in Unity through internships at Electrum Interactive, Smollan and Constituents AI. These experiences have strengthened my problem-solving skills, taught me to adapt to fast-paced environments, and helped me grow both professionally and personally. 
                 </p>
-                <p></p>
+                <p className='my-2'>This website was made by me from scratch!</p>
             </div>
         </div>
     )
@@ -198,7 +241,6 @@ const Credits = () => {
             <CreditsComponent component={"Icons"} siteLink={'https://macosicons.com/#/'} siteName={'macOSicons by Elias'}/>
             <CreditsComponent component={"Backgrounds"} siteLink={'https://wallpapercave.com/'} siteName={'Wallpaper Cave'}/>
             <CreditsComponent component={"Font"} siteLink={'https://developer.apple.com/fonts/'} siteName={'Apple'}/>
-            <CreditsComponent component={"Cat Gif"} siteLink={'https://giphy.com/'} siteName={'Giphy'}/>
         </div>
     )   
 }
