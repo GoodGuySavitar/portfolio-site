@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Home from "./Home"
 import WinHome from "./WinHome"
 import { createContext, useMemo, useState, useEffect } from "react"
+import appleLogo from "../assets/appleLogo.png"
+import windowsLogo from "../assets/windowsLogo.png"
 
 export const UiContext = createContext(null)
 
@@ -45,6 +47,17 @@ const Body = () => {
         setMac: () => { setIsMac(true); setIsWindows(false) },
         setWindows: () => { setIsMac(false); setIsWindows(true) },
     }), [settingsOpen, contactsOpen, projectsOpen, isMac, isWindows])
+
+    // Dynamically set favicon based on OS
+    useEffect(() => {
+        const link = document.querySelector("link[rel='icon']") || document.createElement('link')
+        link.rel = 'icon'
+        link.type = 'image/png'
+        link.href = isWindows ? windowsLogo : appleLogo
+        if (!link.parentNode) {
+            document.head.appendChild(link)
+        }
+    }, [isWindows, isMac])
 
     const appRouter = createBrowserRouter([
         {
