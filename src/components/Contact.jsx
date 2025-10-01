@@ -84,13 +84,14 @@ const Contact = ({onClose}) => {
                <div className='text-lg text-white flex items-center ml-1'>
                    Contacts
                </div>
-               <div className='text-lg text-white flex items-center mr-1'>
-                   <div
-                       className="w-7 h-7 mr-0.5 bg-[#c3c3c3] flex items-center justify-center cursor-pointer select-none
-                       border-3 border-t-white border-l-white border-b-[#828282] border-r-[#828282]
-                       active:border-t-[#828282] active:border-l-[#828282] active:border-b-white active:border-r-white active:translate-y-[1px]"
-                       onClick={onClose}
-                   >
+                <div className='text-lg text-white flex items-center mr-1'>
+                    <div
+                        className="w-7 h-7 mr-0.5 bg-[#c3c3c3] flex items-center justify-center cursor-pointer select-none
+                        border-3 border-t-white border-l-white border-b-[#828282] border-r-[#828282]
+                        active:border-t-[#828282] active:border-l-[#828282] active:border-b-white active:border-r-white active:translate-y-[1px]"
+                        onClick={(e) => { e.stopPropagation(); onClose(); }}
+                        onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }}
+                    >
                        <img src={close} alt="close" className='w-4 select-none' draggable={false}/>
                    </div>
                </div>
