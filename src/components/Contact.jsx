@@ -13,13 +13,14 @@ import gmail from "../assets/gmail1.png"
 const Contact = ({onClose}) => {
   const nodeRef = useRef(null)
   const ui = useContext(UiContext)
+  const isTouchDevice = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches
 
   return (
     <div className="fixed inset-0 pointer-events-none flex items-start justify-center">
     <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center ">
-      <Draggable nodeRef={nodeRef} bounds="parent">
+      <Draggable nodeRef={nodeRef} bounds="parent" disabled={isTouchDevice}>
         {ui.isMac ? (<div ref={nodeRef} 
-        className="w-1/3 h-1/2 mt-4 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white flex items-start justify-between select-none pointer-events-auto">
+        className="w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] mt-4 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white flex items-start justify-between select-none pointer-events-auto">
           <div className='w-full h-full flex flex-col'>
             <div className="relative group w-3 h-3 bg-red-500 rounded-full  mr-2 mb-6 flex items-center justify-center transform transition-transform ease-in-out hover:scale-125"
             onClick={(e) => { e.stopPropagation(); onClose(); }}
@@ -39,39 +40,39 @@ const Contact = ({onClose}) => {
                   Asmit Singh Chauhan
                 </div>
                 <div className='font-normal'>+91 88670 96611</div>
-                <div className='w-2/3 mt-4 flex justify-evenly'>
+                <div className='w-full sm:w-2/3 mt-4 flex flex-col sm:flex-row justify-center sm:justify-evenly gap-4 sm:gap-0'>
 
                   <div className="flex flex-col items-center">
                     <img src={linkedinLogo} 
                       alt="LinkedIn" 
-                      className="w-12 h-12 rounded-full overflow-hidden" 
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" 
                       draggable="false" 
                       onClick={() => {
                         window.open("https://www.linkedin.com/in/asmit-chauhan/", "_blank");
                       }} />
-                    <p className='font-normal' >LinkedIn</p>
+                    <p className='font-normal text-sm sm:text-base' >LinkedIn</p>
                   </div>
 
                   <div className="flex flex-col items-center">
                     <img src={mailLogo} 
                       alt="Email" 
-                      className="w-12 h-12 rounded-full overflow-hidden" 
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" 
                       draggable="false" 
                       onClick={() => {
                         window.open("mailto:blr.asmit@gmail.com", "_blank");
                       }} />
-                    <p className='font-normal'>Email</p>
+                    <p className='font-normal text-sm sm:text-base'>Email</p>
                   </div>
 
                   <div className="flex flex-col items-center">
                     <img src={githubLogo} 
                       alt="Email" 
-                      className="w-12 h-12 rounded-full overflow-hidden" 
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" 
                       draggable="false" 
                       onClick={() => {
                         window.open("https://github.com/GoodGuySavitar", "_blank");
                       }} />
-                    <p className='font-normal'>GitHub</p>
+                    <p className='font-normal text-sm sm:text-base'>GitHub</p>
                   </div>
                 </div>
               </div>
@@ -79,7 +80,7 @@ const Contact = ({onClose}) => {
           </div>     
         </div>
       ) : (
-        <div ref={nodeRef} className='w-1/3 h-1/2 bg-[#c3c3c3] text-black border-3
+        <div ref={nodeRef} className='w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] bg-[#c3c3c3] text-black border-3
         border-l-white border-t-white shadow pointer-events-auto select-none flex flex-col overflow-hidden'>
            <div className='w-full h-8 flex justify-between items-center bg-[#000082] shrink-0'>
                <div className='text-lg text-white flex items-center ml-1'>
@@ -112,18 +113,18 @@ const Contact = ({onClose}) => {
                 <div className='font-normal'>
                   +91 88670 96611
                 </div>
-                <div className='w-2/3 mt-4 flex justify-evenly'>
+                <div className='w-full sm:w-2/3 mt-4 flex flex-col sm:flex-row justify-center sm:justify-evenly gap-4 sm:gap-0'>
                   <div className="flex flex-col items-center">
-                    <img src={linkedinWin} alt="LinkedIn" className="w-12 h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("https://www.linkedin.com/in/asmit-chauhan/", "_blank"); }} />
-                    <p className='font-normal' >LinkedIn</p>
+                    <img src={linkedinWin} alt="LinkedIn" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("https://www.linkedin.com/in/asmit-chauhan/", "_blank"); }} />
+                    <p className='font-normal text-sm sm:text-base' >LinkedIn</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <img src={gmail} alt="Email" className="w-12 h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("mailto:blr.asmit@gmail.com", "_blank"); }} />
-                    <p className='font-normal'>Email</p>
+                    <img src={gmail} alt="Email" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("mailto:blr.asmit@gmail.com", "_blank"); }} />
+                    <p className='font-normal text-sm sm:text-base'>Email</p>
                   </div>
                   <div className="flex flex-col items-center">
-                    <img src={githubWin} alt="Email" className="w-12 h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("https://github.com/GoodGuySavitar", "_blank"); }} />
-                    <p className='font-normal'>GitHub</p>
+                    <img src={githubWin} alt="Email" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden" draggable="false" onClick={() => { window.open("https://github.com/GoodGuySavitar", "_blank"); }} />
+                    <p className='font-normal text-sm sm:text-base'>GitHub</p>
                   </div>
                 </div>
               </div>

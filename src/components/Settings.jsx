@@ -16,6 +16,7 @@ import close from '../assets/close.png'
 const Settings = ({onClose, setWallpaper, currentWallpaper}) => {
     const nodeRef = useRef(null)
     const ui = useContext(UiContext)
+    const isTouchDevice = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches
 
     const [settingsActive, setSettingsActive] = useState(true);
     const [wallpapersActive, setWallpapersActive] = useState(false);
@@ -57,7 +58,7 @@ const Settings = ({onClose, setWallpaper, currentWallpaper}) => {
     return (
         <div className="fixed inset-0 pointer-events-none flex items-start justify-center">
         <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center">
-        <Draggable nodeRef={nodeRef} bounds="parent">
+        <Draggable nodeRef={nodeRef} bounds="parent" disabled={isTouchDevice}>
             { ui.isMac ? (
                 <div ref={nodeRef} className='w-[90vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[70vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh] bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white
                 flex items-start justify-between select-none pointer-events-auto overflow-hidden scrollbar-custom'>

@@ -30,6 +30,9 @@ const Home = () => {
   
   const {level, charging} = useBattery()
   const date = new Date();
+  
+  // Check if battery information is available
+  const isBatteryAvailable = level !== null && level !== undefined;
 
   const [time, setTime] = useState(new Date())
 
@@ -113,11 +116,19 @@ const Home = () => {
       bg-black text-white select-none" style={{cursor: `url(${cursor}), auto`}}>
         <div className='ml-1 text-lg'>  </div>
         <div className='flex items-center'>
-          <div className='text-sm'>
-            {Math.round(level * 100)}%
-          </div>
-          <img src={battery} alt="battery logo" className='mx-1'/>
-          {charging && <img src={chargingLogo} alt="charging logo" className='h-4'/>}
+          {isBatteryAvailable ? (
+            <>
+              <div className='text-sm'>
+                {Math.round(level * 100)}%
+              </div>
+              <img src={battery} alt="battery logo" className='mx-1'/>
+              {charging && <img src={chargingLogo} alt="charging logo" className='h-4'/>}
+            </>
+          ) : (
+            <div className='text-xs text-gray-400 mr-2' title="Battery information not available">
+              ⚡
+            </div>
+          )}
           <div className='mx-4 text-sm'>{hours}:{minutes} {(date.getHours() >= 12)? "PM" : "AM" } </div>
         </div>
       </div>
@@ -149,7 +160,7 @@ const Home = () => {
 
           {/* DOCK */}
 
-          <div className="absolute bottom-8 w-full flex justify-center">
+          <div className="dock-container fixed bottom-4 sm:bottom-8 w-full flex justify-center z-10">
             <Dock icons={icons}/>
           </div>
           

@@ -28,6 +28,9 @@ const WinHome = () => {
 
     const {level, charging} = useBattery()
     const date = new Date();
+    
+    // Check if battery information is available
+    const isBatteryAvailable = level !== null && level !== undefined;
   
     const [time, setTime] = useState(new Date())
   
@@ -107,11 +110,19 @@ const WinHome = () => {
                     <div className=" ml-1 text-xl font-semibold">Start</div>
                 </div>
                 <div className="h-11/12 flex border-3 border-t-[#828282] border-l-[#828282] border-b-white border-r-white  mr-2">
-                    <div className='flex items-center text-lg ml-1'>
-                        {Math.round(level * 100)}%
-                    </div>
-                    {charging ? <img src={winCharging} alt="battery logo" className='mx-1'/>  : 
-                    <img src={winBattery} alt="battery logo" className='mx-1'/>}
+                    {isBatteryAvailable ? (
+                        <>
+                            <div className='flex items-center text-lg ml-1'>
+                                {Math.round(level * 100)}%
+                            </div>
+                            {charging ? <img src={winCharging} alt="battery logo" className='mx-1'/>  : 
+                            <img src={winBattery} alt="battery logo" className='mx-1'/>}
+                        </>
+                    ) : (
+                        <div className='flex items-center text-sm ml-1 text-gray-600' title="Battery information not available">
+                            ⚡
+                        </div>
+                    )}
                     <div className='mx-4 flex items-center'>{hours}:{minutes} {(date.getHours() >= 12)? "PM" : "AM" } </div>
                 </div>
             </div>
@@ -189,12 +200,13 @@ export default WinHome
 const Credits = ({onClose}) => {
     const nodeRef = useRef(null)
     const ui = useContext(UiContext)
+    const isTouchDevice = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: coarse)').matches
 
     return (
       <div className="fixed inset-0 pointer-events-none flex items-start justify-center">
         <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center ">
-          <Draggable nodeRef={nodeRef} bounds="parent">
-            <div ref={nodeRef} className='w-1/3 h-1/2 bg-[#c3c3c3] text-black border-3
+          <Draggable nodeRef={nodeRef} bounds="parent" disabled={isTouchDevice}>
+            <div ref={nodeRef} className='w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] bg-[#c3c3c3] text-black border-3
             border-l-white border-t-white shadow pointer-events-auto select-none flex flex-col overflow-hidden'>
               <div className='w-full h-8 flex justify-between items-center bg-[#000082] shrink-0'>
                   <div className='text-lg text-white flex items-center ml-1'>
@@ -212,10 +224,10 @@ const Credits = ({onClose}) => {
                   </div>
               </div>
               <div className='w-full flex-1 min-h-0 mt-2'>
-                <div className='w-full h-full flex flex-col items-start justify-start overflow-auto scrollbar-win95 p-3 text-base'>
-                  <div className='mb-2'>Cursor: <a href='http://www.rw-designer.com/user/94406' target='_blank' className='text-blue-700 underline' rel='noreferrer'>darix555</a></div>
-                  <div className='mb-2'>Icons: Windows 95 OSR2, <a href="https://wallpapers-clan.com/app-icons/windows-95/" className='text-blue-700 underline'>wallpapers clan</a></div>
-                  <div className='mb-2'>Font: <a href='https://www.dafont.com/w95fa.font' target='_blank' className='text-blue-700 underline' rel='noreferrer'>dafont</a></div>
+                <div className='w-full h-full flex flex-col items-start justify-start overflow-auto scrollbar-win95 p-3 text-sm sm:text-base'>
+                  <div className='mb-2 break-words'>Cursor: <a href='http://www.rw-designer.com/user/94406' target='_blank' className='text-blue-700 underline' rel='noreferrer'>darix555</a></div>
+                  <div className='mb-2 break-words'>Icons: Windows 95 OSR2, <a href="https://wallpapers-clan.com/app-icons/windows-95/" className='text-blue-700 underline'>wallpapers clan</a></div>
+                  <div className='mb-2 break-words'>Font: <a href='https://www.dafont.com/w95fa.font' target='_blank' className='text-blue-700 underline' rel='noreferrer'>dafont</a></div>
                 </div>
               </div>
             </div>

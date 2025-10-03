@@ -33,6 +33,25 @@ html, body, #root {
   overflow: hidden; /* prevent page scroll; let internal panes manage overflow */
 }
 
+/* Fix for iOS Safari/Chrome viewport issues */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  .dock-container {
+    position: fixed;
+    bottom: env(safe-area-inset-bottom, 16px);
+    bottom: max(env(safe-area-inset-bottom, 16px), 16px);
+  }
+}
+
+/* Ensure dock is always visible on mobile */
+@media (max-width: 768px) {
+  .dock-container {
+    position: fixed !important;
+    bottom: 16px !important;
+    z-index: 50;
+  }
+}
+
 /* Custom scrollbar for the projects container */
 .scrollbar-custom {
   /* Enable touch scrolling */
