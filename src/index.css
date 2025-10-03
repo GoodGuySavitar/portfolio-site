@@ -52,6 +52,28 @@ html, body, #root {
   }
 }
 
+/* Mobile browser viewport fixes */
+@media (max-width: 768px) {
+  /* Ensure proper spacing for mobile browsers with UI bars */
+  .mobile-contact-container {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+  
+  /* Better spacing for mobile contact content */
+  .mobile-contact-content {
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+  }
+  
+  /* Ensure profile image maintains aspect ratio */
+  .mobile-contact-content img {
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+}
+
 /* Custom scrollbar for the projects container */
 .scrollbar-custom {
   /* Enable touch scrolling */

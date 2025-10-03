@@ -31,16 +31,16 @@ const Contact = ({onClose}) => {
               </span>
             </div>
             <div className='h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg overflow-hidden'>
-              <div className='w-full h-full text-md font-bold tracking-wider flex flex-col items-center overflow-y-auto scrollbar-custom p-2'>
-                <div className='w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg mt-4 mb-2'>
+              <div className='w-full h-full text-md font-bold tracking-wider flex flex-col items-center overflow-y-auto scrollbar-custom p-2 mobile-contact-content min-h-0'>
+                <div className='w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full overflow-hidden shadow-lg mt-2 mb-2 flex-shrink-0'>
                       <img src={profilePic} alt="Profile Picture"   draggable="false"
-                      className="select-none pointer-events-none"/>
+                      className="w-full h-full object-cover select-none pointer-events-none"/>
                 </div> 
-                <div className='text-lg font-semibold tracking-wider'>
+                <div className='text-base sm:text-lg font-semibold tracking-wider'>
                   Asmit Singh Chauhan
                 </div>
-                <div className='font-normal'>+91 88670 96611</div>
-                <div className='w-full sm:w-2/3 mt-4 flex flex-col sm:flex-row justify-center sm:justify-evenly gap-4 sm:gap-0'>
+                <div className='font-normal text-sm sm:text-base'>+91 88670 96611</div>
+                <div className='w-full sm:w-2/3 mt-2 sm:mt-4 flex flex-col sm:flex-row justify-center sm:justify-evenly gap-2 sm:gap-0'>
 
                   <div className="flex flex-col items-center">
                     <img src={linkedinLogo} 
