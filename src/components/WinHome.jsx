@@ -206,7 +206,7 @@ const Credits = ({onClose}) => {
       <div className="fixed inset-0 pointer-events-none flex items-start justify-center">
         <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center ">
           <Draggable nodeRef={nodeRef} bounds="parent" disabled={isTouchDevice}>
-            <div ref={nodeRef} className='w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] bg-[#c3c3c3] text-black border-3
+            <div ref={nodeRef} className='w-[92vw] sm:w-1/3 md:w-1/3 lg:w-1/3 h-[60vh] sm:h-1/2 md:h-1/2 lg:h-1/2 bg-[#c3c3c3] text-black border-3
             border-l-white border-t-white shadow pointer-events-auto select-none flex flex-col overflow-hidden'>
               <div className='w-full h-8 flex justify-between items-center bg-[#000082] shrink-0'>
                   <div className='text-lg text-white flex items-center ml-1'>

@@ -20,7 +20,7 @@ const Contact = ({onClose}) => {
     <div className="w-full h-11/12 mt-5 pointer-events-none flex items-start justify-center ">
       <Draggable nodeRef={nodeRef} bounds="parent" disabled={isTouchDevice}>
         {ui.isMac ? (<div ref={nodeRef} 
-        className="w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] mt-4 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white flex items-start justify-between select-none pointer-events-auto">
+        className="w-[92vw] sm:w-1/3 md:w-1/3 lg:w-1/3 h-[60vh] sm:h-1/2 md:h-1/2 lg:h-1/2 mt-4 bg-black/50 backdrop-blur-lg rounded-2xl border border-gray-400/30 shadow-lg p-2 text-white flex items-start justify-between select-none pointer-events-auto">
           <div className='w-full h-full flex flex-col'>
             <div className="relative group w-3 h-3 bg-red-500 rounded-full  mr-2 mb-6 flex items-center justify-center transform transition-transform ease-in-out hover:scale-125"
             onClick={(e) => { e.stopPropagation(); onClose(); }}
@@ -30,9 +30,9 @@ const Contact = ({onClose}) => {
                       ✕
               </span>
             </div>
-            <div className='h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg'>
-              <div className='w-full text-md font-bold tracking-wider flex flex-col items-center'>
-                <div className='w-32 h-32 rounded-full overflow-hidden shadow-lg mt-4 mb-2'>
+            <div className='h-full bg-gray-700/50 backdrop-blur-lg rounded-xl border border-gray-300/80 shadow-lg overflow-hidden'>
+              <div className='w-full h-full text-md font-bold tracking-wider flex flex-col items-center overflow-y-auto scrollbar-custom p-2'>
+                <div className='w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg mt-4 mb-2'>
                       <img src={profilePic} alt="Profile Picture"   draggable="false"
                       className="select-none pointer-events-none"/>
                 </div> 
@@ -80,7 +80,7 @@ const Contact = ({onClose}) => {
           </div>     
         </div>
       ) : (
-        <div ref={nodeRef} className='w-[92vw] sm:w-3/4 md:w-2/3 lg:w-1/2 h-[60vh] sm:h-[65vh] md:h-[70vh] bg-[#c3c3c3] text-black border-3
+        <div ref={nodeRef} className='w-[92vw] sm:w-1/3 md:w-1/3 lg:w-1/3 h-[60vh] sm:h-1/2 md:h-1/2 lg:h-1/2 bg-[#c3c3c3] text-black border-3
         border-l-white border-t-white shadow pointer-events-auto select-none flex flex-col overflow-hidden'>
            <div className='w-full h-8 flex justify-between items-center bg-[#000082] shrink-0'>
                <div className='text-lg text-white flex items-center ml-1'>
