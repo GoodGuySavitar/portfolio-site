@@ -81,7 +81,7 @@ const Home = () => {
   }
 
   const openResume = () => {
-    window.open("https://drive.google.com/file/d/1PcDz_86G-9tp9M--V9YyjMsRU9Ck6lNL/view?usp=sharing", "_blank");
+    window.open("https://drive.google.com/file/d/1Nbj7Wq5HcMzXdc2JaLbikQLJP6qiLYhn/view?usp=sharing", "_blank");
   }
 
   const openWindows = () => {
